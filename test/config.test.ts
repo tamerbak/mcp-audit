@@ -36,6 +36,12 @@ describe("normalizeConfig", () => {
     );
   });
 
+  it("rejects a non-array disabledRules value", () => {
+    expect(() => normalizeConfig({ disabledRules: "MCP001" })).toThrow(
+      /disabledRules.*array/i,
+    );
+  });
+
   it("rejects an invalid severity override", () => {
     expect(() =>
       normalizeConfig({ severityOverrides: { MCP001: "nope" } }),
