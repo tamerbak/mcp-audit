@@ -92,7 +92,10 @@ export function normalizeConfig(
     ignore: [...base.ignore],
   };
 
-  if (Array.isArray(obj.disabledRules)) {
+  if (obj.disabledRules !== undefined) {
+    if (!Array.isArray(obj.disabledRules)) {
+      throw new Error("Invalid disabledRules; expected an array of rule ids.");
+    }
     config.disabledRules = obj.disabledRules.map(String);
   }
   if (Array.isArray(obj.enabledRules)) {
